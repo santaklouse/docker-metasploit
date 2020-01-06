@@ -8,8 +8,15 @@ service postgresql start
 echo '[+] Initializing tor'
 service tor start
 
-#echo '[+] Updating msf'
-#/opt/msf/msfupdate --git-branch master
+git config --global user.name git
+git config --global user.email "email@example.com"
+
+echo '[+] Updating msf'
+/opt/msf/msfupdate --git-remote origin
+
+rvm install "ruby-2.6.5"
+cd /opt/msf/
+bundle install
 
 echo '[+] Well done, enjoy your shell'
 tmux new-session  "msfconsole; read"
